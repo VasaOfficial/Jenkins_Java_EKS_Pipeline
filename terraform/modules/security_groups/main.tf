@@ -81,6 +81,14 @@ resource "aws_security_group" "monitoring_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Allow Blackbox Exporter HTTP traffic
+  ingress {
+    from_port   = 9115
+    to_port     = 9115
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # Allow SSH access (if needed for management)
   ingress {
     from_port   = 22

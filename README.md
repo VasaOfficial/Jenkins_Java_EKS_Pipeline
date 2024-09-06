@@ -184,6 +184,67 @@ then run:
 kubectl apply -f sec.yaml -n webapps
 ```
 
+5. Monitoring configuration
+
+```
+sudo apt update
+wget https://github.com/prometheus/prometheus/releases/download/v2.54.1/prometheus-2.54.1.linux-amd64.tar.gz
+tar -xvf prometheus-2.51.0-rc.0.linux-amd64.tar.gz
+rm -rf prometheus-2.51.0-rc.0.linux-amd64.tar.gz
+cd prometheus-2.51.0-rc.0.linux-amd64/
+./prometheus &
+cd ..
+sudo apt-get install -y adduser libfontconfig1 musl
+wget https://dl.grafana.com/enterprise/release/grafana-enterprise_11.2.0_amd64.deb
+sudo dpkg -i grafana-enterprise_11.2.0_amd64.deb
+sudo /bin/systemctl start grafana-server
+wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.25.0/blackbox_exporter-0.25.0.linux-amd64.tar.gz
+tar -xvf blackbox_exporter-0.25.0.linux-amd64.tar.gz
+rm -rf blackbox_exporter-0.25.0.linux-amd64.tar.gz
+cd blackbox_exporter-0.25.0.linux-amd64/
+./blackbox_exporter &
+cd ..
+```
+
+Grafana default pass and user is admin
+
+Setup blackbox exporter
+
+```
+cd prometheus-2.51.0-rc.0.linux-amd64/
+vi prometheus.yml
+```
+
+Paste this in prometheus.yml
+
+```yaml
+- job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+        - http://prometheus.io    # Target to probe with http.
+        - http://example.com:8080 # HERE GOES THE ULR OF THE APPLICATION
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 'here goes the ip of your blackbox':9115  # The blackbox exporter's real hostname:port.
+```
+
+After that is done run this:
+
+```
+pgrep prometheus
+kill {number gotten from the last command}
+./prometheus &
+```
+
+Next add prometheus as data source in grafana, also add dashboard with an id of 7587
+
 add pipeline script:
 
 ```
