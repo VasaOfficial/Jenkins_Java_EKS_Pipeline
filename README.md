@@ -4,7 +4,7 @@ make an key pair on aws and put it in the tfvars
 
 Bonus use kubeaudit for scanning the kubernetes yml file for security reasons
 
-1. SSH into sonarqube vm and run these commands
+SSH into sonarqube vm and run these commands
 
 ```
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
@@ -13,7 +13,7 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 get the public ip address of sonarqube paste it in url and add :9000 to access it
 sonarqube default pass and user is admin, login
 
-2. To access jenkins paste public ip address and add :8080 at the end of the url
+To access jenkins paste public ip address and add :8080 at the end of the url
 
 install there jenkins plugins:
 Eclipse Temurin installer
@@ -184,7 +184,7 @@ then run:
 kubectl apply -f sec.yaml -n webapps
 ```
 
-5. Monitoring configuration
+Monitoring configuration
 
 ```
 sudo apt update
