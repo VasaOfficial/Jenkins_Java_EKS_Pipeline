@@ -1,5 +1,15 @@
 # Jenkins_Java_EKS_Pipeline
 
+## Provisioning Infrastructure with Terraform
+
+run this commands:
+```
+terraform init
+terraform fmt -check
+terraform validate
+terraform plan
+terraform apply
+```
 make an key pair on aws and put it in the tfvars
 
 Bonus use kubeaudit for scanning the kubernetes yml file for security reasons
@@ -16,15 +26,25 @@ sonarqube default pass and user is admin, login
 To access jenkins paste public ip address and add :8080 at the end of the url
 
 install there jenkins plugins:
+<br />
 Eclipse Temurin installer
+<br />
 Config File Provider
+<br />
 Pipeline Maven Integration
+<br />
 Maven Integration
+<br />
 SonarQube Scanner
+<br />
 Kubernetes
+<br />
 Kubernetes CLI
+<br />
 Kubernetes Client Api
+<br />
 Kubernetes Credentials
+<br />
 Docker and Docker Pipeline if available
 
 Now configure the plugins:
