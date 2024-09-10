@@ -1,5 +1,10 @@
 # Jenkins_Java_EKS_Pipeline
 
+## CI/CD Pipeline diagram
+
+![Screenshot_4](https://github.com/user-attachments/assets/ea395397-1313-4c93-92a9-00990b91e981)
+
+
 ## Provisioning Infrastructure with Terraform
 
 run this commands:
